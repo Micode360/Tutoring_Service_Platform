@@ -1,0 +1,33 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+myenv/
+.myenv
+/myenv
+
+
+# SQLite database (if you use it in dev)
+db.sqlite3
+db.sqlite3-journal
+
+# Media & static (generated files)
+media/
+
+
+# If using Django migrations — keep migration files, but ignore pycache inside
+*/migrations/__pycache__/
+
+# -----------------------
+# Environment variables
+# -----------------------
+.env
+*.env
+.env.*
+!.env.example   # Keep a safe example env file for other devs
