@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tutors/', include('tutor_management.urls')),
     path('users/', include('user.urls')),
-    path('session/', include('course_booking.urls')),
     path('student/', include('student_management.urls')),
     path('course/', include('course.urls'))
 ]

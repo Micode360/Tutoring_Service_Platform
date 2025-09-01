@@ -2,25 +2,26 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import CourseSerializer
+from django.shortcuts import get_object_or_404
 from .models import Course
+from tutor_management.models import Tutor
+
 
 # Create your views here.
-class CourseSerializer(APIView):
+class CourseManagement(APIView):
     def get(self, request):
-        courses = Course.objects.all().values()
+        courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
         return Response({"message": "Get request successful", "data": serializer.data}, status=status.HTTP_200_OK)
     
     def post(self, request):
-        course_data = request.data
+        # if you want to prevent duplicate course titles per tutor:
+        tutor = get_object_or_404(Tutor, user=request.user)
 
-        if Course.objects.filter(user=request.user).exists(): # update here
-            return Response({"message": "A courses profile already exists for this user. Use PATCH/PUT to update."}, status=status.HTTP_400_BAD_REQUEST)
-        
-        serializer = CourseSerializer(data=course_data)
+        serializer = CourseSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save(**{"user": request.user}) # update here
+            serializer.save(tutor=tutor) # update here
             return Response({"message": "Post request successful"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
@@ -60,3 +61,5 @@ class CourseSerializer(APIView):
              return Response({"message": "This course does not exist"}, status=status.HTTP_404_NOT_FOUND)
         course_data.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+

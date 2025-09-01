@@ -7,7 +7,7 @@ from .models import Tutor
 # Create your views here.
 class TutorManagement(APIView):
     def get(self, request):
-        tutors = Tutor.objects.all().values()
+        tutors = Tutor.objects.all()
         serializer = TutorSerializer(tutors, many=True)
         return Response({"message": "Get request successful", "data": serializer.data}, status=status.HTTP_200_OK)
     

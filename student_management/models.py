@@ -11,5 +11,5 @@ class Student(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     interests = models.JSONField(default=list, blank=True)
-    level = models.CharField(max_length=50, choices=STUDENT_LEVEL, blank=True)   
+    level = models.CharField(max_length=50, choices=STUDENT_LEVEL, default="beginner")   
 

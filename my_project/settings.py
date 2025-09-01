@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'tutor_management',
     'user',
-    'course_booking',
     'student_management',
     'course',
     
