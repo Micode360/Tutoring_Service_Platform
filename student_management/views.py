@@ -7,18 +7,18 @@ from .models import Student
 # Create your views here.
 class StudentManagement(APIView):
     def get(self, request):
-        tutors = Student.objects.all()
-        serializer = StudentSerializer(tutors, many=True)
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
         return Response({"message": "Get request successful", "data": serializer.data}, status=status.HTTP_200_OK)
     
 
     def post(self, request):
-        tutor_data = request.data
+        student_data = request.data
 
         if Student.objects.filter(user=request.user).exists():
             return Response({"message": "A tutor profile already exists for this user. Use PATCH/PUT to update."}, status=status.HTTP_400_BAD_REQUEST)
         
-        serializer = StudentSerializer(data=tutor_data)
+        serializer = StudentSerializer(data=student_data)
 
         if serializer.is_valid():
             serializer.save(user=request.user)
@@ -29,11 +29,11 @@ class StudentManagement(APIView):
 
     def put(self, request, id):
         try:
-            tutor_data = Student.objects.get(id=id)
+            student_data = Student.objects.get(id=id)
         except Student.DoesNotExist:
              return Response({"message": "This student does not exist"}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = StudentSerializer(tutor_data, data=request.data)
+        serializer = StudentSerializer(student_data, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -44,11 +44,11 @@ class StudentManagement(APIView):
 
     def patch(self, request, id):
         try:
-            tutor_data = Student.objects.get(id=id)
+            student_data = Student.objects.get(id=id)
         except Student.DoesNotExist:
              return Response({"message": "This student does not exist"}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = StudentSerializer(tutor_data, data=request.data, partial=True)
+        serializer = StudentSerializer(student_data, data=request.data, partial=True)
 
         if serializer.is_valid():
             serializer.save()
