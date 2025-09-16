@@ -4,8 +4,6 @@ from django.contrib.auth.password_validation import validate_password
 
 
 
-
-
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     confirm_password = serializers.CharField(write_only=True, required=True)

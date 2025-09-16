@@ -1,6 +1,8 @@
+import random
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from .models import User, PasswordReset
 from rest_framework import permissions
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
@@ -11,7 +13,7 @@ from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 class RegisterUsers(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -22,7 +24,7 @@ class RegisterUsers(APIView):
 class LoginUsers(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         email = request.data.get("email")
         password = request.data.get("password")
 
@@ -36,3 +38,37 @@ class LoginUsers(APIView):
             return Response({"mesaage": "login successful.", "access": str(access), "refresh": str(refresh)})
         else:
             return Response({"error": "invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+
+class ForgotPassword(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=404)
+
+        # Generate your otp here
+        otp = str(random.randint(100000, 999999))
+
+        PasswordReset.objects.create(user=user, otp=otp)
+        return Response({"message": "OTP sent to your email."})
+    
+
+class VerifyOTP(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        otp = request.data.get("otp")
+
+        try:
+            user = User.objects.get(email=email)
+            reset = PasswordReset.objects.filter(user=user, otp=otp, is_used=False).last()
+            if reset:
+                reset.is_used = True
+                reset.save()
+                return Response({"message": "OTP verified. You can reset your password."})
+            else:
+                return Response({"error": "Invalid or expired OTP"}, status=400)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=404)

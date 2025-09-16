@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import TutorSerializer
 from .models import Tutor
+from .permisions import IsTutor
 
 # Create your views here.
 class TutorManagement(APIView):
+    permission_classes = [IsTutor]
     def get(self, request):
         tutors = Tutor.objects.all()
         serializer = TutorSerializer(tutors, many=True)

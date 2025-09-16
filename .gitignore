@@ -19,6 +19,8 @@ db.sqlite3-journal
 
 # Media & static (generated files)
 media/
+./media
+/media
 
 
 # If using Django migrations — keep migration files, but ignore pycache inside
