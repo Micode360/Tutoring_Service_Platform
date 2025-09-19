@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from .managers import Manager
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 
@@ -19,6 +20,7 @@ class User(AbstractUser): # Template
     role = models.CharField(max_length=20, choices=USER_ROLES) 
     is_approved = models.BooleanField(default=False) # Made boolean field false
     phone = models.CharField(max_length=20)
+    
 
     USERNAME_FIELD = 'email' # Use email as the unique identifier
     REQUIRED_FIELDS = []

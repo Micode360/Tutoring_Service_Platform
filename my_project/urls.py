@@ -19,12 +19,26 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tutors/', include('tutor_management.urls')),
     path('users/', include('user.urls')),
     path('student/', include('student_management.urls')),
-    path('course/', include('course.urls'))
+    path('course/', include('course.urls')),
+
+    # API documentation
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui"
+    )
 ]
 
 if settings.DEBUG:

@@ -5,11 +5,15 @@ from .serializers import CourseSerializer
 from django.shortcuts import get_object_or_404
 from .models import Course
 from tutor_management.models import Tutor
-from .serializers import SubscribeSerializer
 from student_management.models import Student
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 # Create your views here.
 class CourseManagement(APIView):
+    authentication_classes = [JWTAuthentication]
+    
     def get(self, request):
         courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
@@ -65,30 +69,16 @@ class CourseManagement(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-
 class Subscribe(APIView):
     def post(self, request, id):
-        # Find the course the student wants to subscribe to if it does exists in the database 
+       # Find the course the student wants to subscribe to
         course = get_object_or_404(Course, id=id)
 
-        # Validate the request data to check if the student exists in the database
-        serializer = SubscribeSerializer(data=request.data)
+        # Get the student object linked to the logged-in user
+        student = get_object_or_404(Student, user=request.user)
 
-        if serializer.is_valid():
-            # Get the student_id from the validated data
-            student_id = serializer.validated_data['student_id']
+        # Add this student to the course's "students" list
+        course.students.add(student)
 
-            # Make sure this student actually exists in the database
-            student = get_object_or_404(Student, id=student_id)
-
-            # Add this student to the course's "students" list
-            # The method is like append in the list
-            course.students.add(student)
-
-            return Response(
-                {"message": f"Student {student.id} subscribed to course {course.id}"},
-                status=status.HTTP_200_OK
-            )
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": f"Student {student.id} subscribed to course {course.id}"}, status=status.HTTP_200_OK)
 

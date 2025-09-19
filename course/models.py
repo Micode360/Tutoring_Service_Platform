@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from tutor_management.models import Tutor
 from student_management.models import Student
 
@@ -15,7 +16,13 @@ class Course(models.Model):
     video_file = models.FileField(upload_to="courses/", blank=True, null=True)
     
     # Many students can join many courses. (This is many to many)
-    students = models.ManyToManyField(Student, related_name="courses")  
+    students = models.ManyToManyField(Student, related_name="courses") 
+
+    # Time this course was created
+    created_at = models.DateTimeField(default=timezone.now) 
+
+    # Time this course was updated
+    updated_at = models.DateTimeField(auto_now=True)
     
 
     

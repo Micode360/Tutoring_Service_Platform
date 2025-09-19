@@ -1,0 +1,436 @@
+openapi: 3.0.3
+info:
+  title: Tutoring Application API
+  version: 1.0.0
+  description: Api for my tutoring app project
+paths:
+  /course/endpoint/:
+    get:
+      operationId: course_endpoint_retrieve
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: course_endpoint_create
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: course_endpoint_update
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: course_endpoint_partial_update
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: course_endpoint_destroy
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /course/endpoint/{id}/:
+    get:
+      operationId: course_endpoint_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: course_endpoint_create_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: course_endpoint_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: course_endpoint_partial_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: course_endpoint_destroy_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /course/suscribe/{id}/:
+    post:
+      operationId: course_suscribe_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - course
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /student/endpoint/:
+    get:
+      operationId: student_endpoint_retrieve
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: student_endpoint_create
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: student_endpoint_update
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: student_endpoint_partial_update
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: student_endpoint_destroy
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /student/endpoint/{id}/:
+    get:
+      operationId: student_endpoint_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: student_endpoint_create_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: student_endpoint_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: student_endpoint_partial_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: student_endpoint_destroy_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - student
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /tutors/endpoint/:
+    get:
+      operationId: tutors_endpoint_retrieve
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: tutors_endpoint_create
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: tutors_endpoint_update
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: tutors_endpoint_partial_update
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: tutors_endpoint_destroy
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /tutors/endpoint/{id}/:
+    get:
+      operationId: tutors_endpoint_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: tutors_endpoint_create_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: tutors_endpoint_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: tutors_endpoint_partial_update_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: tutors_endpoint_destroy_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - tutors
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/forgotpassword/:
+    post:
+      operationId: users_forgotpassword_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /users/login/:
+    post:
+      operationId: users_login_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /users/register/:
+    post:
+      operationId: users_register_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /users/verifyotp/:
+    post:
+      operationId: users_verifyotp_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

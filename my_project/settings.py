@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'user',
     'student_management',
     'course',
+    'drf_spectacular'
     
 ]
 
@@ -58,7 +59,24 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated' # makes all my urls or endpoint protected in such a way that it needs a token to access it.
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Tutoring Application API',
+    'DESCRIPTION': 'Api for my tutoring app project',
+    'VERSION': '1.0.0',
+    "SECURITY": [
+            {"Bearer": []},
+        ],
+        "SECURITY_SCHEMES": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        },
 }
 
 MIDDLEWARE = [
@@ -163,7 +181,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SMTP CONFIGURATION
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT"))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS") == "True"
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("APP_PASSWORD")

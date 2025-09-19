@@ -7,9 +7,28 @@ from rest_framework import permissions
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
-
+from drf_spectacular.utils import extend_schema, OpenApiExample
 
 # Create your views here.
+@extend_schema(
+    summary="To register user",
+    request=dict,
+    responses={200:dict, 400:dict, 201: dict},
+    examples= [
+        OpenApiExample(
+            name="Reister User",
+            value={
+                "first_name": "Joe",
+                "last_name": "Hart",
+                "email": "joehart@mail.com",
+                "password": "#Limpoaitw43",
+                "confirm_password": "#Limpoaitw43",
+                "role": "tutor"
+            }
+
+        )
+    ]
+)
 class RegisterUsers(APIView):
     permission_classes = [permissions.AllowAny]
 
@@ -17,10 +36,24 @@ class RegisterUsers(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "user registeration successful."})
+            return Response({"message": "user registeration successful."}, status=status.HTTP_201_CREATED)
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
+@extend_schema(
+    summary="To Login user",
+    request=dict,
+    responses={200:dict, 400:dict},
+    examples= [
+        OpenApiExample(
+            name="Login User",
+            value={
+                "email": "joehart@mail.com",
+                "password": "#Limpoaitw43",
+            }
 
+        )
+    ]
+)
 class LoginUsers(APIView):
     permission_classes = [permissions.AllowAny]
 

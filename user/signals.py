@@ -3,8 +3,6 @@ from utils.index import send_smtp_mail
 from .models import PasswordReset
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from django.template.loader import render_to_string
-from django.core.mail import EmailMultiAlternatives
 
 
 
@@ -24,8 +22,6 @@ def send_mail_for_subscription_with_template(sender, instance, created, **kwargs
             subject,
             from_email,
             to,
-            render_to_string,
-            EmailMultiAlternatives,
             {
                 "header": f"{first_name} {last_name}",
                 "description": "We are glad to have you with us.",
@@ -53,8 +49,6 @@ def send_otp_email(sender, instance, created, **kwargs):
             subject,
             from_email,
             to,
-            render_to_string,
-            EmailMultiAlternatives,
             {
                 "header": "Your OTP Code",
                 "description": "Use the one-time password (OTP) below to verify your account.",
