@@ -14,8 +14,7 @@ myenv/
 
 
 # SQLite database (if you use it in dev)
-db.sqlite3
-db.sqlite3-journal
+
 
 # Media & static (generated files)
 media/
